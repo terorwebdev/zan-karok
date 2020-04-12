@@ -1,0 +1,7 @@
+{
+    "version": 1,
+    "masterServer": "http://localhost:3000",
+    "clientServer": "http://localhost:3001",
+    "contentServer": "http://localhost:3002",
+    "socketServer": "ws://localhost:3003"
+}

@@ -17,7 +17,8 @@ function startconnection() {
     MongoClient.connect(url, options)
         .then((db) => {
             console.log('DB created/connected');
-            console.log('Connection Info :', db);
+            // add to log
+            // console.log('Connection Info :', db);
             // db.close();
         })
         .catch(err => {
