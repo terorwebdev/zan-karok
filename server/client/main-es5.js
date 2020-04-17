@@ -66,8 +66,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
 
-    var routes = [];
+
+    var ngx_socket_io__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ngx-socket-io */
+    "./node_modules/ngx-socket-io/__ivy_ngcc__/fesm2015/ngx-socket-io.js");
+    /* harmony import */
+
+
+    var _layout_main_main_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./layout/main/main.component */
+    "./src/app/layout/main/main.component.ts");
+
+    var path = 'http://' + window.location.hostname + ':3003';
+    var config = {
+      url: path,
+      options: {}
+    };
+    var routes = [{
+      path: '',
+      component: _layout_main_main_component__WEBPACK_IMPORTED_MODULE_3__["MainComponent"]
+    }];
 
     var AppRoutingModule = function AppRoutingModule() {
       _classCallCheck(this, AppRoutingModule);
@@ -80,12 +100,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       factory: function AppRoutingModule_Factory(t) {
         return new (t || AppRoutingModule)();
       },
-      imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+      imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes), ngx_socket_io__WEBPACK_IMPORTED_MODULE_2__["SocketIoModule"].forRoot(config)], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     });
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppRoutingModule, {
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]],
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_2__["SocketIoModule"]],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
       });
     })();
@@ -96,7 +116,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppRoutingModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
-          imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
+          imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes), ngx_socket_io__WEBPACK_IMPORTED_MODULE_2__["SocketIoModule"].forRoot(config)],
           exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         }]
       }], null, null);
@@ -945,15 +965,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var ngx_socket_io__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-    /*! ngx-socket-io */
-    "./node_modules/ngx-socket-io/__ivy_ngcc__/fesm2015/ngx-socket-io.js");
-
-    var path = 'http://localhost:3003';
-    var config = {
-      url: path,
-      options: {}
-    };
+    var _layout_main_main_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./layout/main/main.component */
+    "./src/app/layout/main/main.component.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -968,13 +982,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return new (t || AppModule)();
       },
       providers: [],
-      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_7__["SocketIoModule"].forRoot(config), _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]]]
+      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]]]
     });
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, {
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_7__["SocketIoModule"], _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]]
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _layout_main_main_component__WEBPACK_IMPORTED_MODULE_7__["MainComponent"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]]
       });
     })();
     /*@__PURE__*/
@@ -984,12 +998,108 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
-          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_7__["SocketIoModule"].forRoot(config), _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]],
+          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _layout_main_main_component__WEBPACK_IMPORTED_MODULE_7__["MainComponent"]],
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _materials_materials_module__WEBPACK_IMPORTED_MODULE_5__["MaterialsModule"], _services_services_module__WEBPACK_IMPORTED_MODULE_6__["ServicesModule"]],
           providers: [],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         }]
       }], null, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/layout/main/main.component.ts":
+  /*!***********************************************!*\
+    !*** ./src/app/layout/main/main.component.ts ***!
+    \***********************************************/
+
+  /*! exports provided: MainComponent */
+
+  /***/
+  function srcAppLayoutMainMainComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "MainComponent", function () {
+      return MainComponent;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _services_socket_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../services/socket.service */
+    "./src/app/services/socket.service.ts");
+
+    var MainComponent = /*#__PURE__*/function () {
+      function MainComponent(socket) {
+        _classCallCheck(this, MainComponent);
+
+        this.socket = socket;
+        this.socket.sendAuth();
+      }
+
+      _createClass(MainComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          console.log("ngOnInit loadede");
+          this.socket.clientAuth().subscribe(function (msg) {
+            console.log('Incoming clientAuth', msg);
+          });
+          this.socket.clientMsg().subscribe(function (msg) {
+            console.log('Incoming clientAuth', msg);
+          });
+        }
+      }]);
+
+      return MainComponent;
+    }();
+
+    MainComponent.ɵfac = function MainComponent_Factory(t) {
+      return new (t || MainComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_socket_service__WEBPACK_IMPORTED_MODULE_1__["SocketService"]));
+    };
+
+    MainComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+      type: MainComponent,
+      selectors: [["app-main"]],
+      decls: 2,
+      vars: 0,
+      template: function MainComponent_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "main works!");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      },
+      styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xheW91dC9tYWluL21haW4uY29tcG9uZW50LmNzcyJ9 */"]
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MainComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+          selector: 'app-main',
+          templateUrl: './main.component.html',
+          styleUrls: ['./main.component.css']
+        }]
+      }], function () {
+        return [{
+          type: _services_socket_service__WEBPACK_IMPORTED_MODULE_1__["SocketService"]
+        }];
+      }, null);
     })();
     /***/
 
@@ -1488,9 +1598,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function SocketService(socket) {
         _classCallCheck(this, SocketService);
 
-        this.socket = socket;
-        console.log('socket started');
-        this.clientAuth();
+        this.socket = socket; //this.sendAuth();
       }
 
       _createClass(SocketService, [{
@@ -1514,7 +1622,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "sendAuth",
-        value: function sendAuth(msg) {
+        value: function sendAuth() {
+          var msg = {
+            cmd: 'req-auth',
+            type: 'id'
+          };
           this.socket.emit('kclient-auth', msg);
         }
       }]);

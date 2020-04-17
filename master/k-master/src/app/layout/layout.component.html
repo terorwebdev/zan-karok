@@ -1,0 +1,25 @@
+<div class="example-container">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1 class="example-app-name">Karaoke Manager &nbsp;>&nbsp;{{currentSubMenu.name}}</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav class="sideNav">
+            <mat-nav-list>
+                <a (click)="routeTo(nav)" mat-list-item *ngFor="let nav of subMenuList">
+                {{nav.name}}
+                <mat-divider> </mat-divider>
+              </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <app-contents *ngIf="currentSubMenu.route==='KList'"></app-contents>
+            <app-uploads *ngIf="currentSubMenu.route==='upload'"></app-uploads>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+    <!-- <app-footer class="footer"></app-footer> -->
+</div>

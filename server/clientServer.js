@@ -6,6 +6,7 @@ var cors2 = require('cors');
 
 app2.use(express2.static(__dirname + '/client'));
 app2.use('/config', express2.static(__dirname + '/static/config'));
+app2.use('/assets', express2.static(__dirname + '/client/assets'));
 
 app2.use(cors2());
 

@@ -9,9 +9,8 @@ import { Socket } from 'ngx-socket-io';
 export class SocketService {
 
   constructor(private socket: Socket) {
-    console.log('socket started');
-    this.clientAuth();
-   }
+    //this.sendAuth();
+  }
 
   clientAuth() {
     return this.socket
@@ -29,8 +28,20 @@ export class SocketService {
     this.socket.emit('kclient', msg);
   }
 
-  sendAuth(msg: any) {
+  sendAuth() {
+    const msg = {cmd: 'req-auth', type: 'id', name: "test"};
     this.socket.emit('kclient-auth', msg);
+  }
+
+  txHeartBeat() {
+    const msg = {cmd: 'heartbeat'};
+    this.socket.emit('heartbeat', msg);
+  }
+
+  rxHeartBeat() {
+    return this.socket
+      .fromEvent<any>('heartbeat')
+      .pipe(map(data => data));
   }
 
 }

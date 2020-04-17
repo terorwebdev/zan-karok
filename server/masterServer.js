@@ -8,6 +8,7 @@ var cors = require('cors');
 
 app.use(express.static(__dirname + '/master'));
 app.use('/config', express.static(__dirname + '/static/config'));
+app.use('/assets', express.static(__dirname + '/master/assets'));
 
 app.use(cors());
 
