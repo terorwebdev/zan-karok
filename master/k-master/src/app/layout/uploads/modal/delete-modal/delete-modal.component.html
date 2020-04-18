@@ -1,0 +1,21 @@
+<h1 matDialogTitle>Delete</h1>
+
+<mat-dialog-content>
+    <div *ngFor="let file of deleteList; let i=index" style="display: flex;">
+        {{i+1}}. {{file.name}}
+        <span class="fill-remaining-space"></span>
+        <ng-container *ngIf="isSuccess[i]; else notSuccess">
+            <mat-icon aria-label="success">done</mat-icon>&nbsp;<span>Deleted</span>
+        </ng-container>
+        <ng-template #notSuccess>
+            <mat-icon aria-label="notSuccess" (click)="remove(file.name)">clear</mat-icon>
+        </ng-template>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <span class="fill-remaining-space"></span>
+    <button mat-raised-button (click)="cancel()" color="warn">Close</button>
+    <button mat-raised-button (click)="confirm()" color="primary">Confirm</button>
+    <span class="fill-remaining-space"></span>
+</mat-dialog-actions>

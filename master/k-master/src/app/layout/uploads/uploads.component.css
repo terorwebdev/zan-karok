@@ -1,0 +1,27 @@
+.layout {
+    padding: 20px;
+}
+
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox.
+   Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+
+.tableContainer {
+    background: #cbcecc;
+    color: rgba(0, 0, 0, .87);
+    width: 100%;
+    height: calc(100vh - 224px) !important;
+    overflow: auto;
+}
+
+.tableStyle {
+    width: 100%;
+}
+
+.menu-button:hover {
+    background-color: #fff;
+    ;
+    color: purple;
+}
