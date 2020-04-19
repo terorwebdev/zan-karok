@@ -14,6 +14,8 @@ import { ControlsComponent } from './layout/controls/controls.component';
 import { UploadsComponent } from './layout/uploads/uploads.component';
 import { UploadModalComponent } from './layout/uploads/modal/upload-modal/upload-modal.component';
 import { DeleteModalComponent } from './layout/uploads/modal/delete-modal/delete-modal.component';
+import { PreviewModalComponent } from './layout/uploads/modal/preview-modal/preview-modal.component';
+import { ImportModalComponent } from './layout/uploads/modal/import-modal/import-modal.component';
 
 const path = 'http://localhost:3003';
 const config: SocketIoConfig = { url: path, options: {} };
@@ -27,7 +29,9 @@ const config: SocketIoConfig = { url: path, options: {} };
     ControlsComponent,
     UploadsComponent,
     UploadModalComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    PreviewModalComponent,
+    ImportModalComponent
   ],
   imports: [
     BrowserModule,

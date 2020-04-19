@@ -1,3 +1,4 @@
+import { PreviewModalComponent } from './modal/preview-modal/preview-modal.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { FilesMeta } from './uploads-metadata';
@@ -33,6 +34,8 @@ export class UploadsComponent implements OnInit {
       console.log(result);
       this.uploadList = new MatTableDataSource<FilesMeta>(result.data.children);
     });
+
+    this.currentSelectedContent = [];
   }
 
   selectMasterEvent() {
@@ -82,8 +85,15 @@ export class UploadsComponent implements OnInit {
         break;
       case 'delete':
         dialogRef = this.dialog.open(DeleteModalComponent, {
-          width: '50%',
-          height: '50%',
+          width: 'auto',
+          height: 'auto',
+          data: sendData,
+        });
+        break;
+      case 'preview':
+        dialogRef = this.dialog.open(PreviewModalComponent, {
+          width: 'auto',
+          height: 'auto',
           data: sendData,
         });
         break;
@@ -101,6 +111,9 @@ export class UploadsComponent implements OnInit {
         case 'delete':
           console.log('Delete Incomming : ', incoming);
           this.ngOnInit();
+          break;
+        case 'preview':
+          console.log('Delete Incomming : ', incoming);
           break;
         default:
           break;
