@@ -1,1 +1,97 @@
-<p>contents works!</p>
+<div class="layout">
+    <mat-toolbar color="primary">
+        <button mat-raised-button matTooltip="home" color="primary" class="menu-button">
+        <mat-icon>home</mat-icon> &nbsp; Home
+        </button> &nbsp;&nbsp;
+        <span>Karaoke List</span>
+        <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Filter</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            Text content
+        </mat-card-content>
+        <mat-card-actions align="start">
+            <button mat-button>Action1</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div class="tableContainer">
+        <table mat-table [dataSource]="currentContentList" class="tableStyle">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','width':'10%','text-align': 'center','color': '#fff'}">
+                    <mat-checkbox [ngClass]="{'checkboxselect':masterSelected, 'checkboxdiselect':!masterSelected}" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="selectMasterEvent()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center','color': '#fff'}">
+                    <mat-checkbox [ngClass]="{'checkboxselect':row.is_selected, 'checkboxdiselect':!row.is_selected}" [(ngModel)]="row.is_selected" name="list_name" value="row.id" (change)="selectListContentEvent(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','width':'20%','color': '#fff'}">
+                    Title </th>
+                <td mat-cell *matCellDef="let row">
+                    <span> {{row.title}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="artist">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': '#fff'}">
+                    Artist </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <span> {{row.artist}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="genre">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': '#fff'}">
+                    Genre </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <span> {{row.genre}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="language">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': '#fff'}">
+                    Language </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <span> {{row.language}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': '#fff'}">
+                    Country </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <span> {{row.country}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="uploaded">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': '#fff'}">
+                    Added Date </th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <span> {{row.update_date | date: 'yyyy-MM-dd'}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%'}"></th>
+                <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                    <button mat-raised-button matTooltip="Info" color="primary" class="menu-button">
+                    <mat-icon>info</mat-icon> &nbsp; Info
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="tableHeader; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableHeader;"></tr>
+        </table>
+    </div>
+</div>

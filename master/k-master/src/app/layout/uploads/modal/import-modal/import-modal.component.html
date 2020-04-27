@@ -1,1 +1,75 @@
-<p>import-modal works!</p>
+<div class="fixActionRow">
+    <h1 matDialogTitle style="display: flex;">
+        Import
+        <span class="fill-remaining-space"></span>
+        <button mat-icon-button matTooltip="Close" (click)="cancel()">
+  <mat-icon>clear</mat-icon>
+</button>
+    </h1>
+
+    <mat-dialog-content class="media">
+        <div class="left">
+            <mat-video [src]="url + importData.name"></mat-video>
+        </div>
+        <div class="right">
+            <mat-card style="height: 100%;">
+                <mat-card-title style="text-align: center;">
+                    Content Details
+                </mat-card-title>
+                <mat-card-content>
+                    <form [formGroup]="form" (ngSubmit)="submit()">
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Title" formControlName="title" appUppercase (input)="valuechange(myInput.value)" (keypress)="valuechange(myInput.value)" #myInput />
+                        </mat-form-field>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Artist" formControlName="artist" appUppercase />
+                        </mat-form-field>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Genre" formControlName="genre" appUppercase />
+                        </mat-form-field>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Album" formControlName="album" appUppercase />
+                        </mat-form-field>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Language" formControlName="language" appUppercase />
+                        </mat-form-field>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Country" formControlName="country" appUppercase />
+                        </mat-form-field>
+
+                        <mat-card-subtitle style="padding-top: 10px;text-align: center;"> Video & Audio </mat-card-subtitle>
+
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Duration (HH:MM:SS)" formControlName="duration">
+                        </mat-form-field>
+
+                        <mat-radio-group formControlName="sound">
+                            <mat-radio-button checked value="karaoke">Karaoke (L/R)</mat-radio-button>&nbsp;&nbsp;
+                            <mat-radio-button value="mono">MONO (No Vocal)</mat-radio-button>
+                        </mat-radio-group>
+
+                        <div style="padding-top: 10px;text-align: center;">
+                            <button type="submit" style="width: 100%;" mat-raised-button color="primary">
+                              Submit
+                            </button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-dialog-content>
+
+    <div class="spacer"></div>
+
+    <!-- <mat-dialog-actions>
+        <span class="fill-remaining-space"></span>
+        <button mat-raised-button (click)="submit()" color="primary">Submit</button>
+        <span class="fill-remaining-space"></span>
+    </mat-dialog-actions> -->
+</div>

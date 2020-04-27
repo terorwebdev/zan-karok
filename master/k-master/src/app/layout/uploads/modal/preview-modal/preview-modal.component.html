@@ -1,23 +1,25 @@
-<h1 matDialogTitle style="display: flex;">
-    Preview &nbsp;:&nbsp;{{previewData.name}}
-    <span class="fill-remaining-space"></span>
-    <button mat-icon-button matTooltip="Close" (click)="cancel()">
+<div class="fixActionRow">
+    <h1 matDialogTitle style="display: flex;">
+        Preview &nbsp;:&nbsp;{{previewData.name}}
+        <span class="fill-remaining-space"></span>
+        <button mat-icon-button matTooltip="Close" (click)="cancel()">
     <mat-icon>clear</mat-icon>
   </button>
-</h1>
+    </h1>
 
-<mat-dialog-content style="display: flex;">
-    <div *ngIf="previewType==='image'">
-        <img [src]="url + previewData.name" />
-    </div>
-    <div *ngIf="previewType==='video'">
-        <mat-video [src]="url + previewData.name"></mat-video>
-    </div>
-    <div *ngIf="previewType==='audio'">
-        <audio [src]="url + previewData.name"></audio>
-    </div>
-    <div *ngIf="previewType==='other'">
-        <p>Not Supported</p>
-    </div>
+    <mat-dialog-content style="display: flex;">
+        <div *ngIf="previewType==='image'">
+            <img [src]="url + previewData.name" />
+        </div>
+        <div *ngIf="previewType==='video'">
+            <mat-video [src]="url + previewData.name"></mat-video>
+        </div>
+        <div *ngIf="previewType==='audio'">
+            <audio [src]="url + previewData.name"></audio>
+        </div>
+        <div *ngIf="previewType==='other'">
+            <p>Not Supported</p>
+        </div>
 
-</mat-dialog-content>
+    </mat-dialog-content>
+</div>

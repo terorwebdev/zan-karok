@@ -14,7 +14,10 @@
         "express": "^4.17.1",
         "express-fileupload": "^1.1.7-alpha.3",
         "formidable": "^1.2.2",
+        "get-video-duration": "^1.0.3",
+        "hh-mm-ss": "^1.2.0",
         "mongodb": "^3.5.5",
+        "move-file": "^2.0.0",
         "socket.io": "^2.3.0"
     },
     "scripts": {

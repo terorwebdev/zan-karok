@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UploadService } from '../../services/upload.service';
 import { UploadModalComponent } from './modal/upload-modal/upload-modal.component';
 import { DeleteModalComponent } from './modal/delete-modal/delete-modal.component';
+import { ImportModalComponent } from './modal/import-modal/import-modal.component';
 
 @Component({
   selector: 'app-uploads',
@@ -97,6 +98,13 @@ export class UploadsComponent implements OnInit {
           data: sendData,
         });
         break;
+      case 'import':
+        dialogRef = this.dialog.open(ImportModalComponent, {
+          width: '80%',
+          height: '80%',
+          data: sendData,
+        });
+        break;
       default:
         break;
     }
@@ -114,6 +122,10 @@ export class UploadsComponent implements OnInit {
           break;
         case 'preview':
           console.log('Delete Incomming : ', incoming);
+          break;
+        case 'import':
+          console.log('Import Incomming : ', incoming);
+          this.ngOnInit();
           break;
         default:
           break;

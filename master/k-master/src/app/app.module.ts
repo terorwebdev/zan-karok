@@ -16,8 +16,9 @@ import { UploadModalComponent } from './layout/uploads/modal/upload-modal/upload
 import { DeleteModalComponent } from './layout/uploads/modal/delete-modal/delete-modal.component';
 import { PreviewModalComponent } from './layout/uploads/modal/preview-modal/preview-modal.component';
 import { ImportModalComponent } from './layout/uploads/modal/import-modal/import-modal.component';
+import { UppercaseDirective } from './directive/uppercase.directive';
 
-const path = 'http://localhost:3003';
+const path = 'http://' + window.location.hostname + ':3003';
 const config: SocketIoConfig = { url: path, options: {} };
 
 @NgModule({
@@ -31,7 +32,8 @@ const config: SocketIoConfig = { url: path, options: {} };
     UploadModalComponent,
     DeleteModalComponent,
     PreviewModalComponent,
-    ImportModalComponent
+    ImportModalComponent,
+    UppercaseDirective
   ],
   imports: [
     BrowserModule,

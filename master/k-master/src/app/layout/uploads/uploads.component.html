@@ -61,7 +61,12 @@
                     <button mat-raised-button matTooltip="Play" color="primary" class="menu-button" (click)="openDialog('preview', row)">
                     <mat-icon>play_arrow</mat-icon> &nbsp; Preview
                     </button>
-                    <button mat-raised-button matTooltip="Import to Karaoke" color="primary" class="menu-button">
+
+		    <button mat-raised-button matTooltip="Rename" color="primary" class="menu-button" (click)="openDialog('rename', row)">
+                    <mat-icon>play_arrow</mat-icon> &nbsp; Rename
+                    </button>
+
+                    <button mat-raised-button matTooltip="Import to Karaoke" color="primary" class="menu-button" (click)="openDialog('import', row)">
                     <mat-icon>edit</mat-icon> &nbsp; Import
                     </button>
 

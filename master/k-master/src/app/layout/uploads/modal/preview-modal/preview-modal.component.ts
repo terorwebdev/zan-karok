@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class PreviewModalComponent implements OnInit {
 
-  url = 'http://localhost:3004/';
+  url = 'http://' + window.location.hostname + ':3004/';
   previewType = 'other';
   previewData: any = {};
 

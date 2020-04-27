@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class UploadService {
 
-  url = 'http://localhost:3004';
+  url = 'http://' + window.location.hostname + ':3004';
 
   // Http Headers
   httpOptions = {
@@ -37,6 +37,22 @@ export class UploadService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  duration(inputPath) {
+    return this.http.post<any>(this.url + '/upload/duration', JSON.stringify(inputPath), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  import(data) {
+    return this.http.post<any>(this.url + '/upload/import', JSON.stringify(data), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
   }
 
   // Error handling
