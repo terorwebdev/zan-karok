@@ -9,6 +9,7 @@
     ],
     "dependencies": {
         "@types/socket.io": "^2.1.4",
+        "bcrypt": "^4.0.1",
         "cors": "^2.8.5",
         "directory-tree": "^2.2.4",
         "express": "^4.17.1",
@@ -18,7 +19,8 @@
         "hh-mm-ss": "^1.2.0",
         "mongodb": "^3.5.5",
         "move-file": "^2.0.0",
-        "socket.io": "^2.3.0"
+        "socket.io": "^2.3.0",
+        "uuidv4": "^6.1.0"
     },
     "scripts": {
         "start": "node index"

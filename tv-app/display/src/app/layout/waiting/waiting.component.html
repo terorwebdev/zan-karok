@@ -1,0 +1,19 @@
+<div class="layout">
+    <mat-card style="width: 50%;">
+
+        <mat-card-title style="width: 100%;text-align: center;">Waiting</mat-card-title>
+        <mat-card-subtitle style="width: 100%;text-align: center;">Please allow player from backend</mat-card-subtitle>
+
+        <mat-card-content style="width: 100%; text-align: center;">
+            <div style="display: flex;">
+                <span class="fill-remaining-space"></span>
+                <mat-spinner></mat-spinner>
+                <span class="fill-remaining-space"></span>
+            </div>
+
+            <div> Server : {{server}} <br/> Ws : {{playerWs}} <br/> Local : {{playerLocal}} <br/> Player Name : {{playlerName}} <br/> Player Id : {{playerId}}</div>
+
+        </mat-card-content>
+
+    </mat-card>
+</div>

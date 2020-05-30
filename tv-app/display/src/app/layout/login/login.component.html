@@ -1,0 +1,47 @@
+<div class="layout">
+
+    <mat-card style="width: 50%;">
+
+        <mat-card-title style="width: 100%;text-align: center;">Authtentication</mat-card-title>
+        <mat-card-subtitle style="width: 100%;text-align: center;">Please enter requirement below</mat-card-subtitle>
+
+        <mat-card-content style="width: 100%;">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <p>
+                    <mat-form-field style="width: 100%;">
+                        <input type="text" matInput placeholder="Server" formControlName="server">
+                        <mat-hint>Example: "https://www.example.com"</mat-hint>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field style="width: 100%;">
+                        <input type="text" matInput placeholder="Ws" formControlName="ws">
+                        <mat-hint>Example: "https://www.example.com"</mat-hint>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field style="width: 100%;">
+                        <input type="text" matInput placeholder="Local" formControlName="local">
+                        <mat-hint>Example: "https://www.example.com"</mat-hint>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field style="width: 100%;">
+                        <input type="text" matInput placeholder="Player Name" formControlName="player_name">
+                        <mat-hint>Player name example "TV1"</mat-hint>
+                    </mat-form-field>
+                </p>
+
+                <div style="text-align: center;">
+                    <button type="submit" mat-button color="primary">Login</button>
+                </div>
+
+            </form>
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

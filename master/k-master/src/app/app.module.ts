@@ -17,6 +17,9 @@ import { DeleteModalComponent } from './layout/uploads/modal/delete-modal/delete
 import { PreviewModalComponent } from './layout/uploads/modal/preview-modal/preview-modal.component';
 import { ImportModalComponent } from './layout/uploads/modal/import-modal/import-modal.component';
 import { UppercaseDirective } from './directive/uppercase.directive';
+import { PlayerComponent } from './layout/player/player.component';
+import { PlayerListComponent } from './layout/player/player-list/player-list.component';
+import { WsDefaultComponent } from './layout/ws-default/ws-default.component';
 
 const path = 'http://' + window.location.hostname + ':3003';
 const config: SocketIoConfig = { url: path, options: {} };
@@ -33,7 +36,10 @@ const config: SocketIoConfig = { url: path, options: {} };
     DeleteModalComponent,
     PreviewModalComponent,
     ImportModalComponent,
-    UppercaseDirective
+    UppercaseDirective,
+    PlayerComponent,
+    PlayerListComponent,
+    WsDefaultComponent
   ],
   imports: [
     BrowserModule,

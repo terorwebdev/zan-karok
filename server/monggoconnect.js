@@ -10,11 +10,22 @@ module.exports = {
     findFile: findFile,
     findFileId: findFileId,
 
+    ListGenre: listGern,
+
     findFileArtist: findFileArtist,
     findFileGenre: findFileGenre,
     findFileSong: findFileSong,
     findFileLanguage: findFileLanguage,
-    findFileCountry: findFileCountry
+    findFileCountry: findFileCountry,
+
+    // player
+    findPlayerName: findPlayerName,
+    addPlayer: addPlayer,
+
+    // master
+    addMasterUser: addMasterUser,
+    findMasterName: findMasterName,
+    findMasterEmail: findMasterEmail
 };
 
 activate();
@@ -57,24 +68,33 @@ function createTable() {
         });
 
 
-    database.createCollection("devices")
+    database.createCollection("player_list")
         .then((item) => {
-            console.log('Monggodb : devices collection create');
+            console.log('Monggodb : player_list collection create');
         })
         .catch(err => {
             console.log('Monggodb : Error :' + err.message);
         });
 
-    /*
+    database.createCollection("master_users")
+        .then((item) => {
+            console.log('Monggodb : master_users collection create');
+        })
+        .catch(err => {
+            console.log('Monggodb : Error :' + err.message);
+        });
+
     // drop table
-    database.collection("karoklist").drop()
+
+    /*
+    database.collection("master_users").drop()
         .then((item) => {
             console.log('Monggodb : karoklist collection droped');
         })
         .catch(err => {
             console.log('Monggodb : Error :' + err.message);
         });
-    */
+        */
 }
 
 // insert to lost of collection
@@ -161,6 +181,41 @@ function findFileArtist(artistName) {
 }
 
 // Genre
+function listGern() {
+    return database.collection("karoklist").find({}, {
+            projection: {
+                _id: 0,
+                title: 0,
+                artist: 0,
+                language: 0,
+                size: 0,
+                country: 0,
+                album: 0,
+                duration: 0,
+                file_extension: 0,
+                filename: 0,
+                sound: 0,
+                upload_by: 0,
+                upload_date: 0,
+                update_date: 0
+            }
+        }).toArray()
+        .then((item) => {
+            console.log('Monggodb :karokListAll : Success');
+            var genre = [];
+
+            for (const x of item) {
+                genre.push(x.genre)
+            }
+
+            return Array.from(new Set(genre));
+        })
+        .catch(err => {
+            console.log('Monggodb : karokListAll Error :' + err.message);
+            return [];
+        });
+}
+
 function findFileGenre(genreName) {
     var findThis = { genre: genreName };
     return database.collection("karoklist").find(findThis, { projection: { _id: 0 } }).toArray()
@@ -213,5 +268,74 @@ function findFileCountry(countryName) {
         .catch(err => {
             console.log('Monggodb : findFileCountry Error :' + err.message);
             return [];
+        });
+}
+
+// Player
+function findPlayerName(name) {
+    var findThis = { player_name: name };
+    return database.collection("player_list").findOne(findThis, { projection: { _id: 0 } })
+        .then((item) => {
+            console.log('Monggodb :findPlayerName - player_list : Success');
+            return item;
+        })
+        .catch(err => {
+            console.log('Monggodb : findPlayerName - player_list Error :' + err.message);
+            return {};
+        });
+}
+
+function addPlayer(data) {
+    data.insert_date = Date.now();
+    data.update_date = Date.now();
+    return database.collection("player_list").insertOne(data)
+        .then((item) => {
+            console.log('Monggodb: findPlayerName - player_list : ', item.ops[0]);
+            return item.ops[0];
+        })
+        .catch(err => {
+            console.log('Monggodb: findPlayerName - player_list Error :' + err.message);
+            return {};
+        });
+}
+
+// master
+function addMasterUser(data) {
+    data.insert_date = Date.now();
+    data.update_date = Date.now();
+    return database.collection("master_users").insertOne(data)
+        .then((item) => {
+            console.log('Monggodb: addMasterUser - master_users : ', item.ops[0]);
+            return item.ops[0];
+        })
+        .catch(err => {
+            console.log('Monggodb: addMasterUser - master_users Error :' + err.message);
+            return {};
+        });
+}
+
+function findMasterName(name) {
+    var findThis = { username: name };
+    return database.collection("master_users").findOne(findThis, { projection: { _id: 0 } })
+        .then((item) => {
+            console.log('Monggodb :findMasterName - master_users : Success');
+            return item;
+        })
+        .catch(err => {
+            console.log('Monggodb : findMasterName - master_users Error :' + err.message);
+            return {};
+        });
+}
+
+function findMasterEmail(name) {
+    var findThis = { email: name };
+    return database.collection("master_users").findOne(findThis, { projection: { _id: 0 } })
+        .then((item) => {
+            console.log('Monggodb :findMasterEmail - master_users : Success');
+            return item;
+        })
+        .catch(err => {
+            console.log('Monggodb : findMasterEmail - master_users Error :' + err.message);
+            return {};
         });
 }

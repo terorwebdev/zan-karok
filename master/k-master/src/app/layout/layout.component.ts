@@ -1,4 +1,8 @@
+import { AuthService } from './../services/auth.service';
+import { SocketService } from '../services/socket.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-layout',
@@ -20,13 +24,38 @@ export class LayoutComponent implements OnInit {
     icon: '',
     route: 'upload',
     name: 'Upload'
-  }];
+  },
+  {
+    id: 3,
+    icon: '',
+    route: 'player',
+    name: 'Player'
+  }
+];
 
   currentSubMenu = this.subMenuList[0];
+  isLogIn = false;
+  wsDisconnected = false;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private socket: SocketService,
+    private auth: AuthService) {
+      if (this.auth.isUserLoggedIn()) {
+        this.isLogIn = true;
+      } else {
+        this.isLogIn = false;
+      }
+
+      this.socket.wsDisconnect.subscribe(data => {
+        this.wsDisconnected = data;
+      });
+    }
 
   ngOnInit(): void {
+    if (this.auth.isUserLoggedIn()) {
+      this.socket.sendAuth();
+    }
   }
 
   routeTo(router) {
@@ -34,10 +63,16 @@ export class LayoutComponent implements OnInit {
     switch (router.route) {
       case 'KList':
           this.currentSubMenu = router;
+          this.router.navigate(['/content']);
           break;
       case 'upload':
           this.currentSubMenu = router;
+          this.router.navigate(['/upload']);
           break;
+      case 'player':
+        this.currentSubMenu = router;
+        this.router.navigate(['/player']);
+        break;
       default:
           break;
     }

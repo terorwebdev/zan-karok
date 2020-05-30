@@ -1,4 +1,5 @@
-<div class="example-container">
+<app-login *ngIf="!isLogIn"></app-login>
+<div *ngIf="isLogIn" class="example-container">
     <mat-toolbar color="primary" class="example-toolbar">
         <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
         <h1 class="example-app-name">Karaoke Manager &nbsp;>&nbsp;{{currentSubMenu.name}}</h1>
@@ -15,11 +16,13 @@
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <app-contents *ngIf="currentSubMenu.route==='KList'"></app-contents>
-            <app-uploads *ngIf="currentSubMenu.route==='upload'"></app-uploads>
+            <router-outlet></router-outlet>
+            <!-- <app-contents *ngIf="currentSubMenu.route==='KList'"></app-contents>
+            <app-uploads *ngIf="currentSubMenu.route==='upload'"></app-uploads> -->
         </mat-sidenav-content>
 
     </mat-sidenav-container>
 
     <!-- <app-footer class="footer"></app-footer> -->
 </div>
+<app-ws-default *ngIf="wsDisconnected" class="wsdisconnect"></app-ws-default>

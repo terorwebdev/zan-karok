@@ -8,8 +8,46 @@ import { Socket } from 'ngx-socket-io';
 })
 export class SocketService {
 
+  timerPromise = null;
+  socketDisconnect = false;
+
   constructor(private socket: Socket) {
     //this.sendAuth();
+
+    this.isAlive();
+
+    this.rxHeartBeat().subscribe((msg) => {
+      console.log('Incoming clientAuth', msg);
+      // cancel timer
+      clearTimeout(this.timerPromise);
+
+      // ckeck condition
+      if (this.socketDisconnect) {
+        this.sendAuth();
+        this.socketDisconnect = false;
+      }
+
+      // send again
+      setTimeout(() => { this.isAlive(); }, 3000);
+    });
+  }
+
+  timmer() {
+    this.timerPromise = setTimeout(() => {
+      this.socketDisconnect = true;
+      console.log('Connection problem');
+    }, 6000);
+  }
+
+  isAlive() {
+    this.txHeartBeat();
+    this.timmer();
+  }
+
+  check() {
+    return this.socket
+      .fromEvent<any>('kclient-auth')
+      .pipe(map(data => data));
   }
 
   clientAuth() {
