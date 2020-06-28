@@ -4,23 +4,21 @@ import { throwError, Observable } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketService {
-
   @Output() wsDisconnect: EventEmitter<any> = new EventEmitter();
+  @Output() playerListener: EventEmitter<any> = new EventEmitter();
+  @Output() clientListener: EventEmitter<any> = new EventEmitter();
+  @Output() masterListener: EventEmitter<any> = new EventEmitter();
 
   timerPromise = null;
   socketDisconnect = false;
 
   socketId: string;
 
-  constructor(
-    private socket: Socket,
-    private auth: AuthService
-  ) {
+  constructor(private socket: Socket, private auth: AuthService) {
     if (this.auth.isUserLoggedIn()) {
       this.isAlive();
     }
@@ -48,11 +46,9 @@ export class SocketService {
       }, 3000);
     });
 
-    this.rxMaster().subscribe((msg) => {
+    this.rxMaster().subscribe((msg: any) => {
       console.log('Incoming master', msg);
-      if (msg.cmd === 'socket-id') {
-        this.setSocketId(msg.socket_id);
-      }
+      this.socketBootstrap(msg);
     });
   }
 
@@ -78,7 +74,11 @@ export class SocketService {
   }
 
   sendAuth() {
-    const msg = { cmd: 'req-socket-id', type: 'master', master_id: this.auth.getMasterId() };
+    const msg = {
+      cmd: 'req-socket-id',
+      type: 'master',
+      master_id: this.auth.getMasterId(),
+    };
     this.socket.emit('kmaster', msg);
   }
 
@@ -93,5 +93,40 @@ export class SocketService {
 
   rxMaster() {
     return this.socket.fromEvent<any>('kmaster').pipe(map((data) => data));
+  }
+
+  socketBootstrap(data: any) {
+    switch (data.cmd) {
+      case 'socket-id': {
+        this.setSocketId(data.socket_id);
+        break;
+      }
+      case 'master': {
+        // statements;
+        break;
+      }
+      case 'player': {
+        // statements;
+        break;
+      }
+      case 'client': {
+        // statements;
+        break;
+      }
+      default: {
+        // statements;
+        break;
+      }
+    }
+  }
+
+  send_msg(to: any, type1: any, data1: any) {
+    const msg = {
+      cmd: to,
+      master_id: this.auth.getMasterId(),
+      type: type1,
+      data: data1
+    };
+    this.socket.emit('kmaster', msg);
   }
 }

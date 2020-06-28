@@ -1,0 +1,37 @@
+.tableContainer {
+    background: #cbcecc;
+    color: rgba(0, 0, 0, .87);
+    width: 100%;
+    height: calc(100vh - 224px) !important;
+    overflow: auto;
+}
+
+.tableStyle {
+    width: 100%;
+}
+
+.dotOnline {
+    height: 25px;
+    width: 25px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dotOffline {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.menuPadding {
+    padding-right: 20px;
+}
+
+.menu-button:hover {
+    background-color: #fff;
+    ;
+    color: purple;
+}

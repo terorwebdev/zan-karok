@@ -3,6 +3,11 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3003;
+const monggo = require('./monggoconnect');
+
+module.exports = {
+    getPlayer: getPlayer
+};
 
 // player
 // socket {socket_id: "", type: "", player_id: ""}
@@ -32,17 +37,21 @@ function removeSocketList(socketId) {
 }
 
 function getPlayer() {
-    var found = socketList.find(function(item) {
-        return item.type === 'player';
+    return new Promise((resolve, reject) => {
+        var found = socketList.filter(function(item) {
+            return item.type === 'player';
+        });
+        return resolve(found);
     });
-    return found;
 }
 
 function getClient() {
-    var found = socketList.find(function(item) {
-        return item.type === 'client';
+    return new Promise((resolve, reject) => {
+        var found = socketList.filter(function(item) {
+            return item.type === 'client';
+        });
+        return resolve(found);
     });
-    return found;
 }
 
 function onConnection(socket) {
@@ -60,8 +69,10 @@ function onConnection(socket) {
         //socket.broadcast.emit('drawing', data);
         data.socket_id = socket.id;
         console.log(data);
-        var res = master_listener(data);
-        socket.emit('kmaster', res);
+        master_listener(data);
+        //socket.emit('kmaster', res);
+        // var res = master_listener(data);
+        // socket.emit('kmaster', res);
     });
 
     // ----- tv-app listener -----
@@ -90,6 +101,11 @@ function onConnection(socket) {
 
     socket.on('disconnect', function() {
         console.log("Disconnected : " + socket.id);
+        const found = socketList.find(item => item.socket_id === socket.id);
+        if (found !== undefined) {
+            var res = { cmd: "player", type: "disconnect", data: found.player_id };
+            socket.broadcast.emit('kmaster', res);
+        }
         var disconnected = removeSocketList(socket.id);
         console.log("Disconnected : ", disconnected);
     });
@@ -97,6 +113,8 @@ function onConnection(socket) {
 }
 
 io.on('connection', onConnection);
+
+// 
 
 function master_listener(data) {
     if (data.cmd === 'req-socket-id') {
@@ -107,7 +125,26 @@ function master_listener(data) {
             master_id: data.master_id
         };
         addSocketList(item);
-        return res;
+        //return res;
+        io.to(data.socket_id).emit('kmaster', res);
+    }
+
+    if (data.cmd === 'approve_player') {
+        var res = { cmd: "player", type: "player_approved", data: data.data };
+        monggo.approve_player(data.data)
+            .then((item) => {
+                console.log('approve_player : ' + data.data);
+                io.to(data.socket_id).emit('kmaster', res);
+
+                const found = socketList.find(item => item.player_id === data.data);
+                if (found !== undefined) {
+                    io.to(found.socket_id).emit('player', res);
+                }
+            })
+            .catch(err => {
+                console.error('approve_player : ' + err);
+            });
+        //io.to(data.socket_id).emit('kmaster', res);
     }
 }
 

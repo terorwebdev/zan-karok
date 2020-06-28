@@ -1,4 +1,5 @@
 const express = require('express');
+const socket = require('./socketServer');
 const app = express();
 const http = require('http').Server(app);
 const port = process.env.PORT || 3000;
@@ -62,6 +63,26 @@ router.post('/register', function(req, res) {
             res.json({ data: { result: "error", data: err } });
         });
 });
+
+router.get('/player_list', function(req, res) {
+    monggo.player_list()
+        .then((item) => {
+            res.json({ result: "success", data: item });
+        })
+        .catch(err => {
+            console.log('Monggodb player_list Error :' + err);
+            res.json({ result: "error", data: [] });
+        });
+});
+
+router.get('/player_list_online', function(req, res) {
+    socket.getPlayer().then(values => {
+        console.log(values);
+        res.json({ result: "success", data: values });
+    });
+});
+
+app.use('/*', express.static(__dirname + '/master'));
 
 function encrypt_password(password) {
     var hashPassword = bcrypt.hashSync(password, 10);

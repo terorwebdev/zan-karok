@@ -1,1 +1,72 @@
-<p>player works!</p>
+<mat-card>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <mat-nav-list class="menuPadding" (click)="switchMenu('registered')">
+                Registered
+            </mat-nav-list>
+            <mat-nav-list class="menuPadding" (click)="switchMenu('unregistered')">
+                Unregistered
+            </mat-nav-list>
+            <mat-nav-list class="menuPadding" (click)="switchMenu('all')">
+                All Player
+            </mat-nav-list>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card-content>
+        <div class="tableContainer">
+            <table mat-table [dataSource]="tablePlayerList" class="tableStyle">
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','width':'10%','text-align': 'center','color': 'black'}">
+                        <mat-checkbox [ngClass]="{'checkboxselect':masterSelected, 'checkboxdiselect':!masterSelected}" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="selectMasterEvent()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center','color': 'black'}">
+                        <mat-checkbox [ngClass]="{'checkboxselect':row.is_selected, 'checkboxdiselect':!row.is_selected}" [(ngModel)]="row.is_selected" name="list_name" value="row.id" (change)="selectListContentEvent(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="player">
+                    <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','width':'10%','color': 'black'}">
+                        Player </th>
+                    <td mat-cell *matCellDef="let row">
+                        <span> {{row.player_name}}</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': 'black'}">
+                        Status </th>
+                    <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                        <span *ngIf="row.online" class="dotOnline">  </span>
+                        <span *ngIf="!row.online" class="dotOffline">  </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="occupied">
+                    <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': 'black'}">
+                        Occupied </th>
+                    <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                        <span></span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="control">
+                    <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size': '18px','text-align': 'center','width':'10%','color': 'black'}">
+                        Control </th>
+                    <td mat-cell *matCellDef="let row" [ngStyle]="{'text-align': 'center'}">
+                        <span *ngIf="!row.registered">
+                          <button mat-raised-button matTooltip="Info" color="primary" class="menu-button" (click)="approvePlayer(row.player_id)">
+                            <mat-icon>info</mat-icon> &nbsp; Approve
+                            </button>
+                        </span>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="tableHeader; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: tableHeader;"></tr>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>

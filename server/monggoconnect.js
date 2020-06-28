@@ -21,11 +21,13 @@ module.exports = {
     // player
     findPlayerName: findPlayerName,
     addPlayer: addPlayer,
+    player_list: player_list,
 
     // master
     addMasterUser: addMasterUser,
     findMasterName: findMasterName,
-    findMasterEmail: findMasterEmail
+    findMasterEmail: findMasterEmail,
+    approve_player: approve_player
 };
 
 activate();
@@ -272,6 +274,18 @@ function findFileCountry(countryName) {
 }
 
 // Player
+function player_list() {
+    return database.collection("player_list").find({}, { projection: { _id: 0 } }).toArray()
+        .then((item) => {
+            console.log('Monggodb :player_list : player_list : Success');
+            return item;
+        })
+        .catch(err => {
+            console.log('Monggodb : player_list Error : player_list' + err.message);
+            return [];
+        });
+}
+
 function findPlayerName(name) {
     var findThis = { player_name: name };
     return database.collection("player_list").findOne(findThis, { projection: { _id: 0 } })
@@ -336,6 +350,20 @@ function findMasterEmail(name) {
         })
         .catch(err => {
             console.log('Monggodb : findMasterEmail - master_users Error :' + err.message);
+            return {};
+        });
+}
+
+function approve_player(playerId) {
+    var findThis = { player_id: playerId };
+    var newvalues = { $set: { registered: true } };
+    return database.collection("player_list").updateOne(findThis, newvalues)
+        .then((item) => {
+            console.log('Monggodb :approve_player - player_list : Success');
+            return item;
+        })
+        .catch(err => {
+            console.log('Monggodb : approve_player - player_list Error :' + err.message);
             return {};
         });
 }
