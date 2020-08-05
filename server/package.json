@@ -13,7 +13,7 @@
         "cors": "^2.8.5",
         "directory-tree": "^2.2.4",
         "express": "^4.17.1",
-        "express-fileupload": "^1.1.7-alpha.3",
+        "express-fileupload": "^1.1.9",
         "formidable": "^1.2.2",
         "get-video-duration": "^1.0.3",
         "hh-mm-ss": "^1.2.0",
